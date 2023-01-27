@@ -13,11 +13,15 @@ class PolyTreeNode
         # debugger
         old_parent = @parent
         @parent = passed_node
-        if @parent != nil && !@parent.children.include?(self)
-            @parent.children << self
+        if @parent != nil
+            if !@parent.children.include?(self)
+                @parent.children << self
+            else
+                @parent.children.delete(self) until @parent.children.count(self) == 1 
+            end 
         end
         if old_parent != nil
-            old_parent.children.delete(self)
+            old_parent.children.delete(self) until old_parent.children.count(self) == 0
         end
     end
  
