@@ -1,3 +1,5 @@
+require "byebug"
+
 class PolyTreeNode
     def initialize(value)
         @value = value
@@ -7,10 +9,13 @@ class PolyTreeNode
 
 
 
-    def parent=(node)
-        @parent = node
-        if @parent.parent != nil
-            @parent.children = node.children
+    def parent=(passed_node)
+        debugger
+        old_parents = @parent
+        @parent = passed_node
+        if @parent != nil
+            @parent.children << self
+            # old_parents.children.delete(self)
         end
     end
  
